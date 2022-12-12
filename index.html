@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <title>Ye Olde Bowl Pool 2021</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/color/jquery.color-2.2.0.min.js"
+            integrity="sha256-aSe2ZC5QeunlL/w/7PsVKmV+fa0eDbmybn/ptsKHR6I=" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-database.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.js"
+            integrity="sha512-rCVQBDU9Ny0aKLo1/B1MqgRjWEMlCL3WJ0DD6mJeK6qMZqpN9JCRxPtMQWWR9XWCMFIqlSgT4uOdwpvxWTSejw=="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body id="root" data-ng-app="bowlpool-application">
+        <img id="loadinggif" src="https://bestanimations.com/media/football/772974109football-animation.gif" alt="">
+        <div id="loadingcount"></div>
+        <main id="mainpage">
+            <div class="jumbotron">
+                <h1>Ye Olde Bowl Pool 2021</h1>
+                <div id="start-nav" class="row">
+                    <nav class="navbar">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#"></a>
+                            </div>
+                            <ul data-ng-controller="navigate" class="nav navbar-nav">
+                                <li><a class="active" data-ng-click="showForm()">Make Your Picks</a></li>
+                                <li><a class="active" data-ng-click="showResults()">See Results</a></li>
+                                <li><a data-ng-click="showPredictions()">Records and Polls</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div id="wrap-completion" class="container">
+                <h1>Thank You For Your Submission!</h1>
+            </div>
+            <div id="wrap-picks" class="container">
+                <div class="row">
+                    <h1 id="mainintro">The Form Has Closed</h1>
+                    <h1 id="mainintro">Put Your Helmets On...We're Going High Tech This Year!</h1> -->
+                    <h2 id="subintro">Below, Add A Username and Pick Radio Buttons. Then Hit Submit.</h2>
+                    <h3 id="tertiaryintro">Questions? <a style="color: black" href="mailto:charlie.ziegenbein@wustl.edu">Send Email Here</a></h3>
+                    <h3 id="quaternaryintro"><a style="color: black" href="https://www.vegasinsider.com/college-football/matchups/">Click Here For Vegas Lines</a></h3>
+                </div>
+                <div class="row">
+                    <div id="wrap-form" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <label id="start">Your Name: <input id="yourname" type="text" onchange="logName()" /></label><br />
+                        <div id="bowlgames" class="games"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="contain-button col text-center">
+                        <button class="btn-lg btn-default btn" onclick="logPicks()">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div id="wrap-results" class="container">
+                <div class="row">
+                    <table id="resultstable">
+                        <tr>
+                            <th>Name</th>
+                            <th>Wins</th>
+                            <th>Losses</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="wrap-analytics" class="container">
+                <div class="row">
+                    <h1>General Statistics</h1>
+                    <div id="stats1" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img src="cfbran.png" alt="Poll">
+                    </div>
+                    <div id="stats2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <img src="appoll.png" alt="Poll">
+                    </div>
+                </div>
+            </div>
+        </main>
+    <script src="main.js"></script>
+    </body>
+
+</html>

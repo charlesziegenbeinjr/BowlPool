@@ -1,0 +1,142 @@
+main {
+    display: none;
+}
+
+#root > img {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    top: 100px;
+}
+
+#loadingcount > h1 {
+    position: relative;
+    text-align: center;
+    top: 100px;
+}
+
+.jumbotron > h1 {
+    text-align: center;
+}
+
+#start-nav {
+    display: block;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+}
+
+.navbar {
+    text-align: center;
+}
+
+ul>li>a {
+    font-size: 20px;
+}
+
+ul>li>a:hover {
+    color: black;
+}
+
+#wrap-picks {
+    display: block;
+}
+
+.games {
+    text-align: left;
+}
+
+#wrap-form {
+    display: block;
+    margin: 0 auto;
+    background-color: #FDF2D9;
+    border-radius: 10px;
+}
+
+#wrap-analytics {
+    display: none;
+}
+
+#wrap-completion {
+    display: none;
+}
+
+#wrap-picks {
+    padding: 50px;
+    background-color: #E41C38;
+    border-radius: 10px;
+}
+
+.contain-button {
+    margin-top: 30px;
+}
+
+#start {
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+    margin: 0 auto;
+    display: block;
+}
+
+.teams {
+    font-size: 20px;
+}
+
+.wrap-games {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#stats1 > img {
+    height: 75%;
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+}
+
+#stats2 > img {
+    height: 75%;
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+}
+
+#mainintro {
+    text-align: center;
+}
+
+#subintro {
+    text-align: center;
+}
+
+#tertiaryintro {
+    text-align: center;
+}
+
+#quaternaryintro {
+    text-align: center;
+}
+
+table {
+    margin-top: 20px;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 5px solid #000000;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
