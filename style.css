@@ -54,7 +54,7 @@ ul>li>a:hover {
 #wrap-form {
     display: block;
     margin: 0 auto;
-    background-color: #FDF2D9;
+    background-color: #FFCB05 ;
     border-radius: 10px;
 }
 
@@ -68,7 +68,7 @@ ul>li>a:hover {
 
 #wrap-picks {
     padding: 50px;
-    background-color: #E41C38;
+    background-color: #00274C ;
     border-radius: 10px;
 }
 
@@ -112,10 +112,12 @@ ul>li>a:hover {
 }
 
 #subintro {
+    color:white;
     text-align: center;
 }
 
 #tertiaryintro {
+    color: white;
     text-align: center;
 }
 
