@@ -72,6 +72,9 @@ ul>li>a:hover {
     border-radius: 10px;
 }
 
+#wrap-results {
+    display:none;
+}
 .contain-button {
     margin-top: 30px;
 }
@@ -94,15 +97,8 @@ ul>li>a:hover {
 }
 
 #stats1 > img {
-    height: 75%;
-    width: 75%;
-    margin: 0 auto;
-    display: block;
-}
-
-#stats2 > img {
-    height: 75%;
-    width: 75%;
+    height: 100%;
+    width: 100%;
     margin: 0 auto;
     display: block;
 }

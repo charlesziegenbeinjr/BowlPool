@@ -1,12 +1,12 @@
 let loading = 0;
+let not_played = false;
+master_names = [];
 // Set-Up: K
 // Key: 'Bowl Game' 
 // -> Values: 'Date', 'Home Team', 'Away Team'
 let bowls = [
-    'Bahamas Bowl',
-    'Cure Bowl',
     'Fenway Bowl',
-    'Jummy Kimmel L.A Bowl',
+    'Jimmy Kimmel L.A Bowl',
     'Las Vegas Bowl',
     'LendingTree Bowl',
     'New Mexico Bowl',
@@ -16,10 +16,10 @@ let bowls = [
     'Boca Raton Bowl',
     'Armed Forces Bowl',
     'New Orleans Bowl',
-    'Camellia Bowl',
     'Independence Bowl',
     'Gasparilla Bowl',
     'Hawaii Bowl',
+    'Camellia Bowl',
     'Quick Lane Bowl',
     'First Responder Bowl',
     'Birmingham Bowl',
@@ -29,6 +29,7 @@ let bowls = [
     'Holiday Bowl',
     'Texas Bowl',
     'Pinstripe Bowl',
+    'Cheez-It Bowl',
     'Alamo Bowl',
     'Dukes Mayo Bowl',
     'Sun Bowl',
@@ -43,16 +44,13 @@ let bowls = [
     'Rose Bowl',
     'Peach Bowl',
     'Fiesta Bowl',
-    'Peach Bowl',
     'National Championship'
 ];
 
 let games = {
-    'Bahamas Bowl': ["Dec. 16","UAB","Miami (Ohio)"],
-    'Cure Bowl': ["Dec. 16","Troy","UTSA"],
     'Fenway Bowl': ["Dec. 17","Louisville","Cincinnati"],
     'Las Vegas Bowl': ["Dec. 17","Florida","Oregon State"],
-    'Jummy Kimmel L.A Bowl': ["Dec.17","Washington State","Fresno State"],
+    'Jimmy Kimmel L.A Bowl': ["Dec.17","Washington State","Fresno State"],
     'LendingTree Bowl': ["Dec. 17","Southern Mississippi","Rice"],
     'New Mexico Bowl': ["Dec. 17","BYU","SMU"],
     'Frisco Bowl': ["Dec. 17","North Texas","Boise State"],
@@ -95,14 +93,24 @@ let games = {
 let userpicks = [];
 
 
-let firebaseConfig = {
-    apiKey: "AIzaSyC75q_4NBY6W0YJNGkhQLEI5GLKEI1sizA",
-    authDomain: "creative-project-11dea.firebaseapp.com",
-    databaseURL: "https://creative-project-11dea.firebaseio.com",
-    projectId: "creative-project-11dea",
-    storageBucket: "creative-project-11dea.appspot.com",
+const firebaseConfig = {
+
+    apiKey: "AIzaSyA2Mi3BZzargHm551x3IWM13VD-jLBi1hY",
+
+    authDomain: "collegebowlpool-2be9f.firebaseapp.com",
+
+    projectId: "collegebowlpool-2be9f",
+
+    storageBucket: "collegebowlpool-2be9f.appspot.com",
+
+    messagingSenderId: "122312768395",
+
+    appId: "1:122312768395:web:9adf6b1c77b735e1facd8e",
+
+    measurementId: "G-98NM4K7XHS"
 };
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.firestore();
 
 function sleep(ms) {
@@ -161,7 +169,7 @@ function displayGames() {
                                     <input type="number" id="score2" name="finalgame" value="' + games[bowls[i]][1] + '">' + games[bowls[i]][2] + '\
                                     <div id="gamestats'+(i)+'"></div>\
                                 </div>');
-            addStatistics(i);
+            // addStatistics(i);
         } else {
             $('#' + rowname).append('<div class="wrap-games col-lg-6 col-md-6 col-sm-6 col-xs-6">\
                                     <h2>'+ bowls[i] + ': ' + games[bowls[i]][0] + '</h2>\
@@ -169,7 +177,7 @@ function displayGames() {
                                     <label class="teams"><input type="radio" id="'+ games[bowls[i]][2].replace(/\s/g, '') + '" name="game' + (i + 1) + '" value="' + games[bowls[i]][2] + '">' + games[bowls[i]][2] + '</label></br>\
                                     <div class="row" id="gamestats'+ (i) +'"></div>\
                                 </div>');
-            addStatistics(i);
+            // addStatistics(i);
         }
     }
 }
@@ -178,9 +186,17 @@ function addStatistics(num) {
     let awayteam = games[bowls[num]][2].replace(/\s/g, '%20');
     hometeam = hometeam.replace('&', '%26');
     awayteam = awayteam.replace('&', '%26');
-    const path1 = "https://api.collegefootballdata.com/records?year=2021&team=" + hometeam;
-    const path2 = "https://api.collegefootballdata.com/records?year=2021&team=" + awayteam;
-    fetch(path1)
+    const path1 = "https://api.collegefootballdata.com/records?year=2022&team=" + hometeam;
+    const path2 = "https://api.collegefootballdata.com/records?year=2022&team=" + awayteam;
+    const options = {
+        method: 'GET',
+        Vary: "Origin",
+        headers: {
+            'Authorization': "Bearer b7dZw2HFUQQeW1QbVhQjHBi08k0lrwFAZwnIJhBw7E4aVe7cZxJQuqv+xxpbODx5",
+            // 'Access-Control-Allow-Origin':'https://cbzjr.com/bowlpool'
+        }
+    }
+    fetch(path1, options)
         .then(response => response.json())
         .then(data => {
             let team1 = data[0].team;
@@ -194,7 +210,7 @@ function addStatistics(num) {
             appendHomeError(num, "Data Not Available",);    
         });
 
-    fetch(path2)
+    fetch(path2, options)
         .then(response => response.json())
         .then(data => {
             console.log(data);
@@ -243,7 +259,6 @@ function appendAwayStatistics(position, team, tg, w, l, t) {
 
 function appendAwayError(position, msg) {
     if (position == (Object.keys(games).length - 1)) {
-        console.log("HERE");
     } else {
         $('#gamestats' + position).append('<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">\
                                                 <h4>'+ msg + '</h4>\
@@ -277,10 +292,18 @@ master_module.controller('navigate', ['$scope', function ($scope) {
         $('#wrap-analytics').css('display', 'none');
         $('#wrap-results').css('display', 'block');
     }
+    $scope.showResultsPlaceholder = function () {
+        alert("Standings Tab Coming Soon!");
+    }
 }]);
 
 
 function logName() {
+    if (not_played == false) {
+        var audio = new Audio('thevictors.mp3');
+        audio.play();
+        not_played = true;
+    }
     let username = document.getElementById('yourname').value;
     if (username.length == 0) {
         alert("You Forgot Your Username");
@@ -299,12 +322,16 @@ async function initialLog(user) {
 
 function logPicks() {
     let username = document.getElementById('yourname').value;
+    if (master_names.includes(username)) {
+        alert("Name Taken. Make Your Name More Specific.");
+        return "ERROR";
+    }
     
     if (username.length == 0) {
         alert("You Forgot Your Username");
         return "ERROR";
     }
-
+    
     for (let i = 0; i < Object.keys(games).length; i++) {
         if ($('input[name="game' + (i + 1) + '"]:checked').length) {
             let pick = $('input[name="game' + (i + 1) + '"]:checked').val();
@@ -315,7 +342,10 @@ function logPicks() {
             return "ERROR";
         }
     }
-
+    
+    document.getElementById("submitbutton").style.display = "none";
+    document.getElementById("logging_message").style.display = "block";
+    document.getElementById("makepicks").style.display = "none";
     let score1 = document.getElementById('score1').value;
     let score2 = document.getElementById('score2').value;
     if (score1.length == 0 || score2.length == 0) {
@@ -342,6 +372,7 @@ async function addPicks(user, picks, s1, s2) {
 async function showResults() {
     let results = await db.collection('bowlpool').get()
     return results.docs.map(doc => {
+        master_names.push(doc.id);
         console.log(doc.data);
         createTable(doc.id, doc.data);
     });

@@ -19,11 +19,11 @@
             integrity="sha512-rCVQBDU9Ny0aKLo1/B1MqgRjWEMlCL3WJ0DD6mJeK6qMZqpN9JCRxPtMQWWR9XWCMFIqlSgT4uOdwpvxWTSejw=="
             crossorigin="anonymous"></script>
         <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/bowl_pool.css')}}">
     </head>
 
     <body id="root" data-ng-app="bowlpool-application">
-        <img id="loadinggif" src="https://bestanimations.com/media/football/772974109football-animation.gif" alt="">
+        <img id="loadinggif" src="https://i.pinimg.com/originals/12/69/ee/1269ee2a52c7e8486686eef5b6e01550.gif" alt="">
         <div id="loadingcount"></div>
         <main id="mainpage">
             <div class="jumbotron">
@@ -35,8 +35,8 @@
                                 <a class="navbar-brand" href="#"></a>
                             </div>
                             <ul data-ng-controller="navigate" class="nav navbar-nav">
-                                <li><a class="active" data-ng-click="showForm()">Make Your Picks</a></li>
-                                <li><a class="active" data-ng-click="showResults()">See Results</a></li>
+                                <li id="makepicks"><a class="active" data-ng-click="showForm()">Make Your Picks</a></li>
+                                <li><a class="active" data-ng-click="showResultsPlaceholder()">See Standings</a></li>
                                 <li><a data-ng-click="showPredictions()">Records and Polls</a></li>
                             </ul>
                         </div>
@@ -45,24 +45,43 @@
             </div>
             <div id="wrap-completion" class="container">
                 <h1>Thank You For Your Submission!</h1>
+                <h2>The Standings Tab Will Be Available Soon!</h2>
+                <h1>AND GO BLUE</h1>
+                <img id='GOBLUE' src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Ff40b25c2-cfa4-4050-94ef-0b054b50c6cb_500x281.gif" alt="">
+                <img src="https://media2.giphy.com/media/9JruuCzn6LxrLxu7tC/giphy.gif" alt="">
             </div>
             <div id="wrap-picks" class="container">
                 <div class="row">
                     <!-- <h1 id="mainintro">The Form Has Closed</h1> -->
-                    <!-- <h1 id="mainintro">Put Your Helmets On...We're Going High Tech This Year!</h1> --> -->
-                    <h2 id="subintro">Below, Add A Username and Pick Radio Buttons. Then Hit Submit.</h2>
-                    <h3 id="tertiaryintro">Questions? <a style="color: white" href="mailto:cbzjr@umich.edu">Send Email Here</a></h3>
-                    <h3 id="quaternaryintro"><a style="color: white" href="https://www.vegasinsider.com/college-football/matchups/">Click Here For Vegas Lines</a></h3>
+                    <h1 id="subintro">First, Add Your Name Below</h1>
+                    <!-- <h3 id="quaternaryintro"><a style="color: white" href="https://www.vegasinsider.com/college-football/matchups/">Click Here For Vegas Lines</a></h3> -->
                 </div>
                 <div class="row">
                     <div id="wrap-form" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <label id="start">Your Name: <input id="yourname" type="text" onchange="logName()" /></label><br />
+                        <!-- <div id="bowlgames" class="games"></div> -->
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- <h1 id="mainintro">The Form Has Closed</h1> -->
+                    <!-- <h1 id="mainintro">Put Your Helmets On...We're Going High Tech This Year!</h1> --> -->
+                    <!-- <h2 id="subintro">Below, Add A Username and Pick Radio Buttons. Then Hit Submit.</h2> -->
+                    <!-- <h3 id="tertiaryintro">Questions? <a style="color: white" href="mailto:cbzjr@umich.edu">Send Email Here</a></h3> -->
+                    <h1 id="subintro">Next, Make Your Picks By Choosing Buttons Below</h1>
+                    <h2 id="tertiaryintro">Questions? Message Me at (978) 918-3449</h2>
+                    <h3 id="quaternaryintro"><a style="color: white"
+                            href="https://www.vegasinsider.com/college-football/matchups/">Click Me For Vegas Lines</a></h3>
+                </div>
+                <div class="row">
+                    <div id="wrap-form" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <!-- <label id="start">Your Name: <input id="yourname" type="text" onchange="logName()" /></label><br /> -->
                         <div id="bowlgames" class="games"></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="contain-button col text-center">
-                        <button class="btn-lg btn-default btn" onclick="logPicks()">Submit</button>
+                        <button id="submitbutton" class="btn-lg btn-default btn" onclick="logPicks()">Submit</button>
+                        <h1 style="display: none" id="logging_message">Please Wait...Logging Your Picks!</h1>
                     </div>
                 </div>
             </div>
@@ -80,16 +99,13 @@
             <div id="wrap-analytics" class="container">
                 <div class="row">
                     <h1>General Statistics</h1>
-                    <div id="stats1" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <img src="cfbran.png" alt="Poll">
-                    </div>
-                    <div id="stats2" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <img src="appoll.png" alt="Poll">
+                    <div id="stats1" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <img src="{{ url_for('static', filename='images/cfbpoll.png')}}" alt="Poll">
                     </div>
                 </div>
             </div>
         </main>
-    <script src="main.js"></script>
+    <script src="{{ url_for('static', filename='scripts/bowl_pool.js')}}"></script>
     </body>
 
 </html>
